@@ -1,13 +1,13 @@
 // forceNew = que haga que la conexión se fuerze
 var socket = io.connect('http://192.168.1.137:6677', {'forceNew': true});
 
-socket.on('messages', function(data){
+socket.on('messages', function(data) {
     console.log(data);
     render(data);
 });
 
 function render(data) {
-    
+
     var html = data.map(function(message, index) {
         return (`
             <div class="message">
@@ -18,6 +18,7 @@ function render(data) {
     }).join(' ');
 
     // mientras va mandando msgs en vez de quedarse arriba, mantiene el foco en los nuevos msgs
+    
     var div_msgs = document.getElementById('messages');
     div_msgs.innerHTML = html;
     div_msgs.scrollTop = div_msgs.scrollHeight;

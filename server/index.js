@@ -3,13 +3,14 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server, {
     cors: {
-    origin: '*',
+        origin: '*',
     }
 });
 
 app.use(express.static('client'));
 
-app.get('/hola-mundo', function(req, res){
+app.get('/hola-mundo', function(req, res) 
+{
     res.status(200).send({message : 'Hola mundo desde una ruta'});
 });
 
@@ -19,7 +20,8 @@ var messages = [{
     nickname: 'Bot - jere8dev.es'
 }];
 
-io.on('connection', function(socket){
+io.on('connection', function(socket) {
+
     console.log("El cliente con IP: "+socket.handshake.address+" se ha conectado...");
 
     socket.emit('messages', messages);
@@ -29,9 +31,11 @@ io.on('connection', function(socket){
     
         io.sockets.emit('messages', messages);
     });
+
 });
 
-server.listen(6677, function(){
+server.listen(6677, function() {
+
     console.log('Server working on http://localhost:6677 !');
 });
 
